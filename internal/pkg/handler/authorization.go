@@ -3,14 +3,12 @@ package handler
 import (
 	"context"
 	"crypto/ecdsa"
-	"crypto/x509"
 	"time"
 
 	authz "github.com/koverto/authorization/api"
 	"github.com/koverto/authorization/pkg/claims"
 
 	"github.com/dgrijalva/jwt-go/v4"
-	"github.com/koverto/errors"
 	"github.com/koverto/micro"
 	"github.com/koverto/mongo"
 	"github.com/koverto/uuid"
@@ -45,7 +43,7 @@ func New(conf *Config, service *micro.Service) (*Authorization, error) {
 		return nil, err
 	}
 
-	pkey, err := x509.ParseECPrivateKey([]byte(conf.PrivateKey))
+	pkey, err := jwt.ParseECPrivateKeyFromPEM([]byte(conf.PrivateKey))
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +71,34 @@ func (a *Authorization) Validate(ctx context.Context, in *authz.Token, out *auth
 }
 
 func (a *Authorization) Invalidate(ctx context.Context, in *authz.Token, out *authz.TokenResponse) error {
-	return errors.NotImplemented(a.ID)
+	out.Success = false
+
+	_, claims, err := a.parseToken(in)
+	if err != nil {
+		return err
+	}
+
+	if invalidated, err := a.tokenInvalidated(ctx, claims.ID); invalidated {
+		return nil
+	} else if err != nil {
+		return err
+	}
+
+	invalid := &invalidToken{
+		TokenID:   claims.ID,
+		ExpiresAt: claims.ExpiresAt.Time,
+	}
+
+	ins, err := bson.Marshal(invalid)
+	if err != nil {
+		return err
+	}
+
+	collection := a.client.Collection("invalid_tokens")
+	_, err = collection.InsertOne(ctx, ins)
+
+	out.Success = err == nil
+	return err
 }
 
 func (a *Authorization) parseToken(in *authz.Token) (*jwt.Token, *claims.Claims, error) {
