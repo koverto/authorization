@@ -5,9 +5,7 @@ package authorization
 
 import (
 	fmt "fmt"
-	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/golang/protobuf/ptypes/timestamp"
 	_ "github.com/koverto/uuid"
 	math "math"
 )
@@ -37,9 +35,9 @@ var _ server.Option
 // Client API for Authorization service
 
 type AuthorizationService interface {
-	Create(ctx context.Context, in *TokenClaims, opts ...client.CallOption) (*Token, error)
-	Validate(ctx context.Context, in *Token, opts ...client.CallOption) (*TokenClaims, error)
-	Invalidate(ctx context.Context, in *TokenClaims, opts ...client.CallOption) (*TokenClaims, error)
+	Create(ctx context.Context, in *TokenRequest, opts ...client.CallOption) (*Token, error)
+	Validate(ctx context.Context, in *Token, opts ...client.CallOption) (*TokenResponse, error)
+	Invalidate(ctx context.Context, in *Token, opts ...client.CallOption) (*TokenResponse, error)
 }
 
 type authorizationService struct {
@@ -54,7 +52,7 @@ func NewAuthorizationService(name string, c client.Client) AuthorizationService 
 	}
 }
 
-func (c *authorizationService) Create(ctx context.Context, in *TokenClaims, opts ...client.CallOption) (*Token, error) {
+func (c *authorizationService) Create(ctx context.Context, in *TokenRequest, opts ...client.CallOption) (*Token, error) {
 	req := c.c.NewRequest(c.name, "Authorization.Create", in)
 	out := new(Token)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -64,9 +62,9 @@ func (c *authorizationService) Create(ctx context.Context, in *TokenClaims, opts
 	return out, nil
 }
 
-func (c *authorizationService) Validate(ctx context.Context, in *Token, opts ...client.CallOption) (*TokenClaims, error) {
+func (c *authorizationService) Validate(ctx context.Context, in *Token, opts ...client.CallOption) (*TokenResponse, error) {
 	req := c.c.NewRequest(c.name, "Authorization.Validate", in)
-	out := new(TokenClaims)
+	out := new(TokenResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -74,9 +72,9 @@ func (c *authorizationService) Validate(ctx context.Context, in *Token, opts ...
 	return out, nil
 }
 
-func (c *authorizationService) Invalidate(ctx context.Context, in *TokenClaims, opts ...client.CallOption) (*TokenClaims, error) {
+func (c *authorizationService) Invalidate(ctx context.Context, in *Token, opts ...client.CallOption) (*TokenResponse, error) {
 	req := c.c.NewRequest(c.name, "Authorization.Invalidate", in)
-	out := new(TokenClaims)
+	out := new(TokenResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -87,16 +85,16 @@ func (c *authorizationService) Invalidate(ctx context.Context, in *TokenClaims, 
 // Server API for Authorization service
 
 type AuthorizationHandler interface {
-	Create(context.Context, *TokenClaims, *Token) error
-	Validate(context.Context, *Token, *TokenClaims) error
-	Invalidate(context.Context, *TokenClaims, *TokenClaims) error
+	Create(context.Context, *TokenRequest, *Token) error
+	Validate(context.Context, *Token, *TokenResponse) error
+	Invalidate(context.Context, *Token, *TokenResponse) error
 }
 
 func RegisterAuthorizationHandler(s server.Server, hdlr AuthorizationHandler, opts ...server.HandlerOption) error {
 	type authorization interface {
-		Create(ctx context.Context, in *TokenClaims, out *Token) error
-		Validate(ctx context.Context, in *Token, out *TokenClaims) error
-		Invalidate(ctx context.Context, in *TokenClaims, out *TokenClaims) error
+		Create(ctx context.Context, in *TokenRequest, out *Token) error
+		Validate(ctx context.Context, in *Token, out *TokenResponse) error
+		Invalidate(ctx context.Context, in *Token, out *TokenResponse) error
 	}
 	type Authorization struct {
 		authorization
@@ -109,14 +107,14 @@ type authorizationHandler struct {
 	AuthorizationHandler
 }
 
-func (h *authorizationHandler) Create(ctx context.Context, in *TokenClaims, out *Token) error {
+func (h *authorizationHandler) Create(ctx context.Context, in *TokenRequest, out *Token) error {
 	return h.AuthorizationHandler.Create(ctx, in, out)
 }
 
-func (h *authorizationHandler) Validate(ctx context.Context, in *Token, out *TokenClaims) error {
+func (h *authorizationHandler) Validate(ctx context.Context, in *Token, out *TokenResponse) error {
 	return h.AuthorizationHandler.Validate(ctx, in, out)
 }
 
-func (h *authorizationHandler) Invalidate(ctx context.Context, in *TokenClaims, out *TokenClaims) error {
+func (h *authorizationHandler) Invalidate(ctx context.Context, in *Token, out *TokenResponse) error {
 	return h.AuthorizationHandler.Invalidate(ctx, in, out)
 }

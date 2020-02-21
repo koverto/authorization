@@ -1,24 +1,23 @@
 syntax = "proto3";
 
-import "github.com/gogo/protobuf@v1.3.1/gogoproto/gogo.proto";
 import "github.com/koverto/uuid/uuid.proto";
-import "google/protobuf/timestamp.proto";
 
 package authorization;
 
 service Authorization {
-    rpc Create(TokenClaims) returns (Token) {}
-    rpc Validate(Token) returns (TokenClaims) {}
-    rpc Invalidate(TokenClaims) returns (TokenClaims) {}
+    rpc Create(TokenRequest) returns (Token) {}
+    rpc Validate(Token) returns (TokenResponse) {}
+    rpc Invalidate(Token) returns (TokenResponse) {}
+}
+
+message TokenRequest {
+    uuid.UUID userID = 1;
 }
 
 message Token {
     string Token = 1;
 }
 
-message TokenClaims {
-    uuid.UUID tokenID = 1 [(gogoproto.moretags) = "bson:\"_id\""];
-    uuid.UUID userID = 2;
-    google.protobuf.Timestamp expiresAt = 3 [(gogoproto.stdtime) = true];
-    google.protobuf.Timestamp invalidatedAt = 4 [(gogoproto.stdtime) = true];
+message TokenResponse {
+    bool success = 1;
 }
