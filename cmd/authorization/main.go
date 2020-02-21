@@ -1,6 +1,11 @@
 package main
 
 import (
+	"crypto/ecdsa"
+	"crypto/elliptic"
+	"crypto/rand"
+	"crypto/x509"
+	"encoding/pem"
 	"fmt"
 	"os"
 
@@ -12,8 +17,24 @@ import (
 )
 
 func main() {
+	pkey, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	enc, err := x509.MarshalECPrivateKey(pkey)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
 	conf := &handler.Config{
 		MongoUrl: "mongodb://localhost:27017",
+		PrivateKey: string(pem.EncodeToMemory(&pem.Block{
+			Type:  "PRIVATE KEY",
+			Bytes: enc,
+		})),
 	}
 
 	service, err := micro.NewService("com.koverto.svc.authorization", conf, env.NewSource(env.WithStrippedPrefix("KOVERTO")))
