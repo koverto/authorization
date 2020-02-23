@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog][], and this project adheres to
 
 ## Unreleased
 
+## v1.2.0 - 2020-02-22
+
+### Added
+
+- `claims.ContextKeyUID`
+
 ## v1.1.0 - 2020-02-22
 
 ### Added

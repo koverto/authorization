@@ -7,6 +7,8 @@ import (
 	"github.com/koverto/uuid"
 )
 
+type ContextKeyUID struct{}
+
 type Claims struct {
 	ID      *uuid.UUID `json:"jti,omitempty"`
 	Subject *uuid.UUID `json:"sub,omitempty"`
