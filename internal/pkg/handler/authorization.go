@@ -65,7 +65,11 @@ func (a *Authorization) Validate(ctx context.Context, in *authz.Token, out *auth
 	}
 
 	invalidated, err := a.tokenInvalidated(ctx, claims.ID)
-	out.Success = token.Valid && !invalidated
+	out.Success = token.Valid && !invalidated && err == nil
+
+	if out.GetSuccess() {
+		out.UserID = claims.Subject
+	}
 
 	return err
 }

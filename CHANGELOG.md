@@ -7,6 +7,12 @@ The format is based on [Keep a Changelog][], and this project adheres to
 
 ## Unreleased
 
+## v1.1.0 - 2020-02-22
+
+### Added
+
+- `Authorization.TokenResponse` now includes `userID`
+
 ## v1.0.0 - 2020-02-21
 
 ### Added

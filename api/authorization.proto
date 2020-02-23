@@ -20,4 +20,5 @@ message Token {
 
 message TokenResponse {
     bool success = 1;
+    uuid.UUID userID = 2;
 }
