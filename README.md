@@ -1,5 +1,7 @@
 # Koverto - Authorization
 
+[![Go](https://github.com/koverto/authorization/workflows/Go/badge.svg)][workflow]
+
 ## Requirements
 
 - [Go][] 1.13
@@ -13,3 +15,4 @@ later][agpl].
 [agpl]: LICENSE
 [go]: https://golang.org/
 [mongodb]: https://www.mongodb.com/
+[workflow]: https://github.com/koverto/authorization/actions?query=workflow%3AGo
