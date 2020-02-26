@@ -11,5 +11,5 @@ require (
 	github.com/koverto/uuid v1.2.1
 	github.com/micro/go-micro/v2 v2.1.2
 	go.mongodb.org/mongo-driver v1.3.0
-	google.golang.org/grpc v1.26.0
+	google.golang.org/grpc v1.27.1
 )
