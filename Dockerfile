@@ -1,4 +1,4 @@
-FROM golang:1.13-alpine AS builder
+FROM golang:1.14-alpine AS builder
 WORKDIR /go/src/github.com/koverto/authorization
 ENV CGO_ENABLED=0 GO111MODULE=on
 

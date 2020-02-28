@@ -1,6 +1,6 @@
 module github.com/koverto/authorization
 
-go 1.13
+go 1.14
 
 require (
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
