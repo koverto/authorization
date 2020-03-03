@@ -30,7 +30,7 @@ type Config struct {
 
 type invalidToken struct {
 	TokenID   *uuid.UUID `bson:"_id"`
-	ExpiresAt time.Time
+	ExpiresAt *time.Time
 }
 
 func New(conf *Config, service *micro.Service) (*Authorization, error) {
@@ -51,46 +51,40 @@ func New(conf *Config, service *micro.Service) (*Authorization, error) {
 	return &Authorization{conf, service, client, pkey}, nil
 }
 
-func (a *Authorization) Create(ctx context.Context, in *authz.TokenRequest, out *authz.Token) (err error) {
-	c := claims.New(in.GetUserID())
+func (a *Authorization) Create(ctx context.Context, in *authz.Claims, out *authz.Token) (err error) {
+	c := claims.New(in.GetSubject())
 	token := jwt.NewWithClaims(jwt.SigningMethodES256, c)
 	out.Token, err = token.SignedString(a.privateKey)
 	return err
 }
 
-func (a *Authorization) Validate(ctx context.Context, in *authz.Token, out *authz.TokenResponse) error {
+func (a *Authorization) Validate(ctx context.Context, in *authz.Token, out *authz.Claims) error {
 	token, claims, err := a.parseToken(in)
 	if err != nil {
 		return err
 	}
 
 	invalidated, err := a.tokenInvalidated(ctx, claims.ID)
-	out.Success = token.Valid && !invalidated && err == nil
 
-	if out.GetSuccess() {
-		out.UserID = claims.Subject
+	if token.Valid && !invalidated && err == nil {
+		out.ID = claims.ID
+		out.Subject = claims.Subject
+		out.ExpiresAt = &claims.ExpiresAt.Time
 	}
 
 	return err
 }
 
-func (a *Authorization) Invalidate(ctx context.Context, in *authz.Token, out *authz.TokenResponse) error {
-	out.Success = false
-
-	_, claims, err := a.parseToken(in)
-	if err != nil {
-		return err
-	}
-
-	if invalidated, err := a.tokenInvalidated(ctx, claims.ID); invalidated {
+func (a *Authorization) Invalidate(ctx context.Context, in *authz.Claims, out *authz.Claims) error {
+	if invalidated, err := a.tokenInvalidated(ctx, in.GetID()); invalidated {
 		return nil
 	} else if err != nil {
 		return err
 	}
 
 	invalid := &invalidToken{
-		TokenID:   claims.ID,
-		ExpiresAt: claims.ExpiresAt.Time,
+		TokenID:   in.GetID(),
+		ExpiresAt: in.GetExpiresAt(),
 	}
 
 	ins, err := bson.Marshal(invalid)
@@ -101,7 +95,6 @@ func (a *Authorization) Invalidate(ctx context.Context, in *authz.Token, out *au
 	collection := a.client.Collection("invalid_tokens")
 	_, err = collection.InsertOne(ctx, ins)
 
-	out.Success = err == nil
 	return err
 }
 

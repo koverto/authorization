@@ -7,6 +7,20 @@ The format is based on [Keep a Changelog][], and this project adheres to
 
 ## Unreleased
 
+## v1.3.0 - 2020-03-02
+
+### Added
+
+- `claims.ContextKeyJTI`
+- `claims.ContextKeySUB`
+- Added token ID as `Claims.ID`
+- Added token expiry as `Claims.ExpiresAt`
+
+### Changed
+
+- Consolidated `TokenRequest` and `TokenResponse` into `Claims`
+- Moved token subject to `Claims.Subject` from `Claims.UserID`
+
 ## v1.2.0 - 2020-02-22
 
 ### Added

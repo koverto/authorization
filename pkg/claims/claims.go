@@ -7,7 +7,9 @@ import (
 	"github.com/koverto/uuid"
 )
 
-type ContextKeyUID struct{}
+type ContextKeyJTI struct{}
+type ContextKeySUB struct{}
+type ContextKeyEXP struct{}
 
 type Claims struct {
 	ID      *uuid.UUID `json:"jti,omitempty"`
