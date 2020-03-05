@@ -11,9 +11,9 @@ import (
 
 	authorization "github.com/koverto/authorization/api"
 	"github.com/koverto/authorization/internal/pkg/handler"
-	"github.com/micro/go-micro/v2/config/source/env"
 
 	"github.com/koverto/micro"
+	"github.com/micro/go-micro/v2/config/source/env"
 )
 
 func main() {
