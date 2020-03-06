@@ -259,6 +259,8 @@ github.com/konsorten/go-windows-terminal-sequences v1.0.2 h1:DB17ag19krx9CFsz4o3
 github.com/konsorten/go-windows-terminal-sequences v1.0.2/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/koverto/micro v1.2.0 h1:m8Gi+PfZMOSEYreobV5tgfdpIN7AiCOV75nCtfMbKZE=
 github.com/koverto/micro v1.2.0/go.mod h1:sTwc/Y8/dBPcjbS1tZVypCUhvx/9EGd/keKhgRjlnRM=
+github.com/koverto/micro v1.3.0 h1:hL91fBSQdrJzpcH2C6jOu0Nr5tgxLekNyVKLd9ovi74=
+github.com/koverto/micro v1.3.0/go.mod h1:sTwc/Y8/dBPcjbS1tZVypCUhvx/9EGd/keKhgRjlnRM=
 github.com/koverto/mongo v1.0.1 h1:2fkqdPBONOviu+PK5e2+pZpUTSpnQfbQlMACpEswkjw=
 github.com/koverto/mongo v1.0.1/go.mod h1:keeVIswfKfgTl0fuxlrLb0IJuDO6JB1/qlntNmkekFg=
 github.com/koverto/uuid v1.3.0 h1:c8Q2+0neAoF73Qbc2n5HxcvpywVYBaBKBGU5LHcHKWc=
