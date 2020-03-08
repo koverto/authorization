@@ -1,6 +1,7 @@
 # Koverto - Authorization
 
 [![Go](https://github.com/koverto/authorization/workflows/Go/badge.svg)][workflow]
+[![Go Report Card](https://goreportcard.com/badge/github.com/koverto/authorization)](https://goreportcard.com/report/github.com/koverto/authorization)
 
 ## Requirements
 
