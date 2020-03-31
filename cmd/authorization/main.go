@@ -30,7 +30,7 @@ func main() {
 	}
 
 	conf := &handler.Config{
-		MongoUrl: "mongodb://localhost:27017",
+		MongoURL: "mongodb://localhost:27017",
 		PrivateKey: string(pem.EncodeToMemory(&pem.Block{
 			Type:  "PRIVATE KEY",
 			Bytes: enc,
