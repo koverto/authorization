@@ -12,7 +12,7 @@ import (
 	authorization "github.com/koverto/authorization/api"
 	"github.com/koverto/authorization/internal/pkg/handler"
 
-	"github.com/koverto/micro"
+	"github.com/koverto/micro/v2"
 	"github.com/micro/go-micro/v2/config/source/env"
 )
 
@@ -37,7 +37,7 @@ func main() {
 		})),
 	}
 
-	service, err := micro.NewService("com.koverto.svc.authorization", conf, env.NewSource(env.WithStrippedPrefix("KOVERTO")))
+	service, err := micro.NewService(authorization.Name, conf, env.NewSource(env.WithStrippedPrefix("KOVERTO")))
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

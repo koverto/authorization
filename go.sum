@@ -257,10 +257,8 @@ github.com/kolo/xmlrpc v0.0.0-20190717152603-07c4ee3fd181/go.mod h1:o03bZfuBwAXH
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.2 h1:DB17ag19krx9CFsz4o3enTrPXyIXCl+2iCXH/aMAp9s=
 github.com/konsorten/go-windows-terminal-sequences v1.0.2/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
-github.com/koverto/micro v1.2.0 h1:m8Gi+PfZMOSEYreobV5tgfdpIN7AiCOV75nCtfMbKZE=
-github.com/koverto/micro v1.2.0/go.mod h1:sTwc/Y8/dBPcjbS1tZVypCUhvx/9EGd/keKhgRjlnRM=
-github.com/koverto/micro v1.3.0 h1:hL91fBSQdrJzpcH2C6jOu0Nr5tgxLekNyVKLd9ovi74=
-github.com/koverto/micro v1.3.0/go.mod h1:sTwc/Y8/dBPcjbS1tZVypCUhvx/9EGd/keKhgRjlnRM=
+github.com/koverto/micro/v2 v2.0.1 h1:rdqbDVB6KF/LDrROCseKeN3YKn/v6nMthVrYuXA6YY4=
+github.com/koverto/micro/v2 v2.0.1/go.mod h1:7uGyRTDJ7ve/tzAeiIeZa3jZA69QBusr5s8QmQ2vvDA=
 github.com/koverto/mongo v1.0.1 h1:2fkqdPBONOviu+PK5e2+pZpUTSpnQfbQlMACpEswkjw=
 github.com/koverto/mongo v1.0.1/go.mod h1:keeVIswfKfgTl0fuxlrLb0IJuDO6JB1/qlntNmkekFg=
 github.com/koverto/uuid v1.3.0 h1:c8Q2+0neAoF73Qbc2n5HxcvpywVYBaBKBGU5LHcHKWc=
@@ -447,7 +445,6 @@ github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q
 github.com/zenazn/goji v0.9.0/go.mod h1:7S9M489iMyHBNxwZnk9/EHS098H4/F6TATF2mIxtB1Q=
 go.etcd.io/bbolt v1.3.3 h1:MUGmc65QhB3pIlaQ5bB4LwqSj6GIonVJXpZiaKNyaKk=
 go.etcd.io/bbolt v1.3.3/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
-go.mongodb.org/mongo-driver v1.3.0 h1:ew6uUIeJOo+qdUUv7LxFCUhtWmVv7ZV/Xuy4FAUsw2E=
 go.mongodb.org/mongo-driver v1.3.0/go.mod h1:MSWZXKOynuguX+JSvwP8i+58jYCXxbia8HS3gZBapIE=
 go.mongodb.org/mongo-driver v1.3.1 h1:op56IfTQiaY2679w922KVWa3qcHdml2K/Io8ayAOUEQ=
 go.mongodb.org/mongo-driver v1.3.1/go.mod h1:MSWZXKOynuguX+JSvwP8i+58jYCXxbia8HS3gZBapIE=

@@ -9,7 +9,7 @@ import (
 	"github.com/koverto/authorization/pkg/claims"
 
 	"github.com/dgrijalva/jwt-go/v4"
-	"github.com/koverto/micro"
+	"github.com/koverto/micro/v2"
 	"github.com/koverto/mongo"
 	"github.com/koverto/uuid"
 	"go.mongodb.org/mongo-driver/bson"
@@ -34,7 +34,7 @@ type invalidToken struct {
 }
 
 func New(conf *Config, service *micro.Service) (*Authorization, error) {
-	client, err := mongo.NewClient(conf.MongoUrl, service.Name)
+	client, err := mongo.NewClient(conf.MongoUrl, "authorization")
 	if err != nil {
 		return nil, err
 	}
