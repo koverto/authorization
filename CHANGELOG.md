@@ -7,6 +7,13 @@ The format is based on [Keep a Changelog][], and this project adheres to
 
 ## Unreleased
 
+## v1.4.2 - 2020-03-31
+
+### Changed
+
+- Updated to github.com/golang/protobuf v1.3.5
+- Updated to github.com/micro/go-micro v2.4.0
+
 ## v1.4.1 - 2020-03-30
 
 ### Changed
