@@ -12,5 +12,5 @@ require (
 	github.com/micro/go-micro/v2 v2.4.0
 	github.com/rs/zerolog v1.18.0
 	go.mongodb.org/mongo-driver v1.3.1
-	google.golang.org/grpc v1.26.0
+	google.golang.org/grpc v1.28.1
 )
