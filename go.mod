@@ -11,6 +11,6 @@ require (
 	github.com/koverto/uuid v1.3.0
 	github.com/micro/go-micro/v2 v2.4.0
 	github.com/rs/zerolog v1.18.0
-	go.mongodb.org/mongo-driver v1.3.1
+	go.mongodb.org/mongo-driver v1.3.3
 	google.golang.org/grpc v1.26.0
 )
